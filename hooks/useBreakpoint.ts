@@ -3,7 +3,8 @@ import { Size, screenSizes } from '../utils/getScreenSizes';
 
 //  returns true if chosen breakpoint is larger than window  
 const useBreakpoint = (size: Size) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth: 0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,7 +16,7 @@ const useBreakpoint = (size: Size) => {
     return () => window.removeEventListener('resize', handleResize);
   });
 
-  return screenSizes[size] > windowWidth;
+  return  screenSizes[size] > windowWidth;
 };
 
 export default useBreakpoint;
